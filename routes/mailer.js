@@ -8,8 +8,9 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
-router.post('/send_mail', catchErrors(async (req, res) => {
+router.post('/send_mail', async (req, res) => {
     "use strict";
+    console.log('Sbe', req);
     // Send an email:
     const client = new postmark.Client(process.env.POSTMARK_API);
     const emailSend = await client.sendEmailWithTemplate({
@@ -30,6 +31,6 @@ router.post('/send_mail', catchErrors(async (req, res) => {
     } else {
         res.json({ "mail_send" : false });
     }
-}));
+});
 
 module.exports = router;
