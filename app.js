@@ -6,12 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // var sassMiddleware = require('node-sass-middleware');
 
+// import environmental variables from our variables.env file
+require('dotenv').config({ path: 'variables.env' });
+
 // var index = require('./routes/index');
 // var users = require('./routes/users');
 var mailer = require('./routes/mailer');
-
-// import environmental variables from our variables.env file
-require('dotenv').config({ path: 'variables.env' });
 
 var app = express();
 
