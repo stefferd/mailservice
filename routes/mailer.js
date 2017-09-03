@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/send_mail', async (req, res) => {
     "use strict";
-    console.log('Sbe', req);
+    console.log('Sbe', process);
     // Send an email:
     const client = new postmark.Client(process.env.POSTMARK_API);
     const emailSend = await client.sendEmailWithTemplate({
