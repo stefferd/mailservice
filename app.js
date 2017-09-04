@@ -6,8 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // var sassMiddleware = require('node-sass-middleware');
 
-var dotenv = require('dotenv');
-dotenv.load();
+require('dotenv').config({ path: 'variables.env' });
 
 // var index = require('./routes/index');
 // var users = require('./routes/users');

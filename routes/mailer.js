@@ -1,14 +1,15 @@
 var postmark = require("postmark");
 var express = require('express');
-const { catchErrors } = require('../controllers/errorHandlers');
 var router = express.Router();
+const { catchErrors } = require('../controllers/errorHandlers');
+const basicAuthentication = require('../helpers/basicAuthentication');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
-router.post('/send_mail', async (req, res) => {
+router.post('/send_mail', basicAuthentication.authentication, catchErrors(async (req, res) => {
     "use strict";
     console.log('Sbe', process);
     // Send an email:
@@ -31,6 +32,6 @@ router.post('/send_mail', async (req, res) => {
     } else {
         res.json({ "mail_send" : false });
     }
-});
+}));
 
 module.exports = router;
