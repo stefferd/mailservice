@@ -3,13 +3,25 @@ var express = require('express');
 var router = express.Router();
 const { catchErrors } = require('../controllers/errorHandlers');
 const basicAuthentication = require('../helpers/basicAuthentication');
+const cors = require('cors');
+
+const whitelist = ['http://www.classiccarseurope.eu'];
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+};
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
-router.post('/send_mail', basicAuthentication.authentication, catchErrors(async (req, res) => {
+router.post('/send_mail', cors(corsOptions), basicAuthentication.authentication, catchErrors(async (req, res) => {
     "use strict";
     console.log('Sbe', process);
     // Send an email:
